@@ -6,6 +6,7 @@ import com.livre.crud.demo.domain.product.RequestProduct;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,7 @@ public class ProductController {
             product.setPrice_in_cents(data.price_in_cents());
             return ResponseEntity.ok(product);
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
         }
     }
     @RequestMapping(method = RequestMethod.DELETE)
@@ -51,7 +52,7 @@ public class ProductController {
             return ResponseEntity.ok("Successful deleted");
         }
         else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
         }
     }
 
